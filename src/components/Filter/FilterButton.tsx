@@ -17,7 +17,7 @@ const FilterButton = ({ label, count, isActive = false }: IProps) => {
 
       <span
         className={`text-xs font-bold ${
-          isActive ? "text-white/80" : " text-slate-500"
+          isActive ? "text-white/80" : "text-slate-500"
         }`}
       >
         {count}

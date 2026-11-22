@@ -1,18 +1,22 @@
-import FilterBar from "./components/FilterBar";
+import { useState } from "react";
+import FilterBar from "./components/Filter/FilterBar";
 import Header from "./components/Header";
 import TicketsTable from "./components/tickets/TicketsTable";
-import { tickets } from "./data";
+import { tickets as initialTickets } from "./data";
 
 function App() {
-  const ticketsNum = tickets.filter(
+  const [ticketsData, setTicketsData] = useState(initialTickets);
+
+  const ticketsNum = ticketsData.filter(
     (ticket) => ticket.status === "open",
   ).length;
+
   return (
     <div>
       <Header ticketsNum={ticketsNum} />
-      <FilterBar />
+      <FilterBar ticketsData={ticketsData} />
 
-      <TicketsTable />
+      <TicketsTable ticketsData={ticketsData} setTicketsData={setTicketsData} />
     </div>
   );
 }

@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { tickets as initialTickets } from "../../data";
-import TicketRow from "./TicketRow";
+import type { Dispatch, SetStateAction } from "react";
+import type { Ticket } from "../../interfaces";
 import type { Status } from "../../types";
+import TicketRow from "./TicketRow";
 
-interface IProps {}
+interface IProps {
+  ticketsData: Ticket[];
+  setTicketsData: Dispatch<SetStateAction<Ticket[]>>;
+}
 
-const TicketsTable = ({}: IProps) => {
-  const [ticketsData, setTicketsData] = useState(initialTickets);
-
+const TicketsTable = ({ ticketsData, setTicketsData }: IProps) => {
   const handleStatusChange = (ticketId: number, newStatus: Status) => {
     setTicketsData((currTicket) =>
       currTicket.map((ticket) =>
