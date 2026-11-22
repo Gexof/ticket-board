@@ -1,4 +1,4 @@
-import type { Priority } from "../types";
+import type { Priority } from "../../types";
 
 interface IProps {
   priority: Priority;

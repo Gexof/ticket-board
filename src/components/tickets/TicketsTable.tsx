@@ -1,11 +1,20 @@
-import { tickets } from "../data";
-import type { Ticket } from "../interfaces";
+import { useState } from "react";
+import { tickets as initialTickets } from "../../data";
 import TicketRow from "./TicketRow";
+import type { Status } from "../../types";
 
 interface IProps {}
 
 const TicketsTable = ({}: IProps) => {
-  const tableData: Ticket[] = tickets;
+  const [ticketsData, setTicketsData] = useState(initialTickets);
+
+  const handleStatusChange = (ticketId: number, newStatus: Status) => {
+    setTicketsData((currTicket) =>
+      currTicket.map((ticket) =>
+        ticket.id === ticketId ? { ...ticket, status: newStatus } : ticket,
+      ),
+    );
+  };
 
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -32,8 +41,14 @@ const TicketsTable = ({}: IProps) => {
           </thead>
 
           <tbody className="divide-y divide-slate-100">
-            {tableData.map((ticket) => (
-              <TicketRow key={ticket.id} ticket={ticket} />
+            {ticketsData.map((ticket) => (
+              <TicketRow
+                key={ticket.id}
+                ticket={ticket}
+                onStatusChange={(newStatus) => {
+                  handleStatusChange(ticket.id, newStatus);
+                }}
+              />
             ))}
           </tbody>
         </table>

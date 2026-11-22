@@ -1,13 +1,15 @@
-import type { Ticket } from "../interfaces";
+import type { Ticket } from "../../interfaces";
+import type { Status } from "../../types";
 import InitialsBadge from "./InitialsBadge";
 import PriorityBadge from "./PriorityBadge";
 import StatusBadge from "./StatusBadge";
 
 interface IProps {
   ticket: Ticket;
+  onStatusChange: (newStatus: Status) => void;
 }
 
-const TicketRow = ({ ticket }: IProps) => {
+const TicketRow = ({ ticket, onStatusChange }: IProps) => {
   return (
     <tr key={ticket.id} className="transition-colors hover:bg-slate-50/80">
       <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-400">
@@ -33,7 +35,7 @@ const TicketRow = ({ ticket }: IProps) => {
       </td>
 
       <td className="px-6 py-4">
-        <StatusBadge status={ticket.status} />
+        <StatusBadge status={ticket.status} onStatusChange={onStatusChange} />
       </td>
     </tr>
   );

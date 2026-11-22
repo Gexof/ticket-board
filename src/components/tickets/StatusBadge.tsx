@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import type { Status } from "../types";
+import type { Status } from "../../types";
 
 interface IProps {
   status: Status;
+  onStatusChange: (newStatus: Status) => void;
 }
 
-const StatusBadge = ({ status }: IProps) => {
+const StatusBadge = ({ status, onStatusChange }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const statuses: Status[] = ["open", "pending", "resolved"];
 
   const statusStyles: Record<Status, string> = {
     open: "bg-blue-50 text-blue-600",
@@ -28,15 +31,18 @@ const StatusBadge = ({ status }: IProps) => {
 
       {isOpen && (
         <ul className="absolute left-0 top-[calc(100%+4px)] z-50 min-w-32 rounded-xl border border-slate-200 bg-white p-1 shadow-lg">
-          <li className="cursor-pointer rounded-lg px-3 py-2 text-sm hover:bg-slate-50">
-            Open
-          </li>
-          <li className="cursor-pointer rounded-lg px-3 py-2 text-sm hover:bg-slate-50">
-            Pending
-          </li>
-          <li className="cursor-pointer rounded-lg px-3 py-2 text-sm hover:bg-slate-50">
-            Resolved
-          </li>
+          {statuses.map((status) => (
+            <li
+              key={status}
+              className="cursor-pointer rounded-lg px-3 py-2 text-sm hover:bg-slate-50"
+              onClick={() => {
+                onStatusChange(status);
+                setIsOpen(false);
+              }}
+            >
+              {status}
+            </li>
+          ))}
         </ul>
       )}
     </div>
