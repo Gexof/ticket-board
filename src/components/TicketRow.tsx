@@ -1,4 +1,5 @@
 import type { Ticket } from "../interfaces";
+import InitialsBadge from "./InitialsBadge";
 import PriorityBadge from "./PriorityBadge";
 import StatusBadge from "./StatusBadge";
 
@@ -21,7 +22,10 @@ const TicketRow = ({ ticket }: IProps) => {
       </td>
 
       <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-600">
-        {ticket.customer}
+        <span className="flex justify-start items-center gap-2">
+          <InitialsBadge name={ticket.customer} />
+          {ticket.customer}
+        </span>
       </td>
 
       <td className="px-6 py-4">
