@@ -1,15 +1,24 @@
 import type { Dispatch, SetStateAction } from "react";
 import type { Ticket } from "../../interfaces";
 import FilterButton from "./FilterButton";
-import type { TicketFilter } from "../../types";
+import type { SortOption, TicketFilter } from "../../types";
+import FilterList from "./FilterList";
 
 interface IProps {
   ticketsData: Ticket[];
   setFilter: Dispatch<SetStateAction<TicketFilter>>;
   filter: TicketFilter;
+  sortBy: SortOption;
+  setSortBy: (value: SortOption) => void;
 }
 
-const FilterBar = ({ ticketsData, setFilter, filter }: IProps) => {
+const FilterBar = ({
+  ticketsData,
+  setFilter,
+  filter,
+  sortBy,
+  setSortBy,
+}: IProps) => {
   const openTickets = ticketsData.filter(
     (ticket) => ticket.status === "open",
   ).length;
@@ -55,6 +64,7 @@ const FilterBar = ({ ticketsData, setFilter, filter }: IProps) => {
           onHandleFilter={setFilter}
         />
       </div>
+      <FilterList sortBy={sortBy} setSortBy={setSortBy} />
     </div>
   );
 };

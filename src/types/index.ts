@@ -1,3 +1,4 @@
 export type Priority = "high" | "medium" | "low";
 export type Status = "open" | "pending" | "resolved";
 export type TicketFilter = Status | "all";
+export type SortOption = "priority" | "recently-updated" | "oldest-updated";
