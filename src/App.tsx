@@ -19,18 +19,24 @@ function App() {
   ).length;
 
   return (
-    <div>
-      <Header ticketsNum={ticketsNum} />
-      <FilterBar
-        ticketsData={ticketsData}
-        setFilter={setFilter}
-        filter={filter}
-      />
+    <div className="min-h-screen bg-slate-50">
+      <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
+        {/* Dashboard Header */}
+        <Header ticketsNum={ticketsNum} />
 
-      <TicketsTable
-        ticketsData={filteredData}
-        setTicketsData={setTicketsData}
-      />
+        {/* Filters Section */}
+        <FilterBar
+          ticketsData={ticketsData}
+          setFilter={setFilter}
+          filter={filter}
+        />
+
+        {/* Tickets Table */}
+        <TicketsTable
+          ticketsData={filteredData}
+          setTicketsData={setTicketsData}
+        />
+      </main>
     </div>
   );
 }

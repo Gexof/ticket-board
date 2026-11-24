@@ -12,7 +12,13 @@ const TicketsTable = ({ ticketsData, setTicketsData }: IProps) => {
   const handleStatusChange = (ticketId: number, newStatus: Status) => {
     setTicketsData((currTicket) =>
       currTicket.map((ticket) =>
-        ticket.id === ticketId ? { ...ticket, status: newStatus } : ticket,
+        ticket.id === ticketId
+          ? {
+              ...ticket,
+              status: newStatus,
+              updatedAt: new Date().toLocaleString(),
+            }
+          : ticket,
       ),
     );
   };
